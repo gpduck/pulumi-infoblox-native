@@ -11,11 +11,11 @@ _utilities.register(
     resource_modules="""
 [
  {
-  "pkg": "xyz",
+  "pkg": "infoblox",
   "mod": "index",
-  "fqn": "pulumi_xyz",
+  "fqn": "pulumi_infoblox",
   "classes": {
-   "xyz:index:Random": "Random"
+   "infoblox:index:Random": "Random"
   }
  }
 ]
@@ -23,9 +23,9 @@ _utilities.register(
     resource_packages="""
 [
  {
-  "pkg": "xyz",
-  "token": "pulumi:providers:xyz",
-  "fqn": "pulumi_xyz",
+  "pkg": "infoblox",
+  "token": "pulumi:providers:infoblox",
+  "fqn": "pulumi_infoblox",
   "class": "Provider"
  }
 ]

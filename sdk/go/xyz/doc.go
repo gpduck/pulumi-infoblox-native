@@ -1,3 +1,3 @@
-// Package xyz exports types, functions, subpackages for provisioning xyz resources.
+// Package infoblox exports types, functions, subpackages for provisioning infoblox resources.
 //
-package xyz
+package infoblox
