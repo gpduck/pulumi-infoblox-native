@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-infoblox/sdk/v3
+module github.com/gpduck/pulumi-infoblox/sdk/v3
 
 go 1.17
 

@@ -7,9 +7,9 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.infoblox
+namespace Pulumi.Infoblox
 {
-    [infobloxResourceType("pulumi:providers:infoblox")]
+    [InfobloxResourceType("pulumi:providers:infoblox")]
     public partial class Provider : Pulumi.ProviderResource
     {
         /// <summary>

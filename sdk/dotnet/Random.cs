@@ -7,9 +7,9 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.infoblox
+namespace Pulumi.Infoblox
 {
-    [infobloxResourceType("infoblox:index:Random")]
+    [InfobloxResourceType("infoblox:index:Random")]
     public partial class Random : Pulumi.CustomResource
     {
         [Output("length")]

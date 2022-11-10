@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-infoblox/provider
+module github.com/gpduck/pulumi-infoblox/provider
 
 go 1.18
 

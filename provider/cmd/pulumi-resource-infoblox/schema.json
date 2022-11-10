@@ -33,7 +33,7 @@
         },
         "go": {
             "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/pulumi/pulumi-infoblox/sdk/go/infoblox"
+            "importBasePath": "github.com/gpduck/pulumi-infoblox/sdk/go/infoblox"
         },
         "nodejs": {
             "dependencies": {

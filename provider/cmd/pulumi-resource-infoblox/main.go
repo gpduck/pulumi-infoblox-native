@@ -17,8 +17,8 @@ package main
 
 import (
 	_ "embed"
-	"github.com/pulumi/pulumi-infoblox/provider/pkg/provider"
-	"github.com/pulumi/pulumi-infoblox/provider/pkg/version"
+	"github.com/gpduck/pulumi-infoblox/provider/pkg/provider"
+	"github.com/gpduck/pulumi-infoblox/provider/pkg/version"
 )
 
 var providerName = "infoblox"
