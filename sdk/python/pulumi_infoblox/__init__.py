@@ -7,6 +7,14 @@ import typing
 # Export this package's modules as members:
 from .provider import *
 from .random import *
+
+# Make subpackages available:
+if typing.TYPE_CHECKING:
+    import pulumi_infoblox.record as __record
+    record = __record
+else:
+    record = _utilities.lazy_import('pulumi_infoblox.record')
+
 _utilities.register(
     resource_modules="""
 [
@@ -16,6 +24,14 @@ _utilities.register(
   "fqn": "pulumi_infoblox",
   "classes": {
    "infoblox:index:Random": "Random"
+  }
+ },
+ {
+  "pkg": "infoblox",
+  "mod": "record",
+  "fqn": "pulumi_infoblox.record",
+  "classes": {
+   "infoblox:record:a": "A"
   }
  }
 ]

@@ -8,6 +8,13 @@ import * as utilities from "./utilities";
 export * from "./provider";
 export * from "./random";
 
+// Export sub-modules:
+import * as record from "./record";
+
+export {
+    record,
+};
+
 // Import resources to register:
 import { Random } from "./random";
 

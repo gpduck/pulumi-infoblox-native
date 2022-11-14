@@ -23,6 +23,50 @@
             "requiredInputs": [
                 "length"
             ]
+        },
+        "infoblox:record:a": {
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "ipv4addr": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "ttl": {
+                    "type": "integer"
+                },
+                "view": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "ipv4addr",
+                "name"
+            ],
+            "inputProperties": {
+                "comment": {
+                    "type": "string"
+                },
+                "ipv4addr": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "ttl": {
+                    "type": "integer"
+                },
+                "view": {
+                    "type": "string"
+                }
+            },
+            "requiredInputs": [
+                "name",
+                "ipv4addr"
+            ]
         }
     },
     "language": {

@@ -16,6 +16,8 @@
         "index.ts",
         "provider.ts",
         "random.ts",
+        "record/a.ts",
+        "record/index.ts",
         "utilities.ts"
     ]
 }

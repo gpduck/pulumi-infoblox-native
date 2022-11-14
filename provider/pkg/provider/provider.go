@@ -20,7 +20,9 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/common/util/logging"
 	"google.golang.org/protobuf/types/known/emptypb"
 	"math/rand"
+	"os"
 	"time"
+	"strings"
 
 	"github.com/pulumi/pulumi/pkg/v3/resource/provider"
 	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
@@ -31,6 +33,8 @@ import (
 	pulumirpc "github.com/pulumi/pulumi/sdk/v3/proto/go"
 
 	pbempty "github.com/golang/protobuf/ptypes/empty"
+
+	ibclient "github.com/infobloxopen/infoblox-go-client/v2"
 )
 
 type infobloxProvider struct {
@@ -38,6 +42,8 @@ type infobloxProvider struct {
 	name    string
 	version string
 	schema  []byte
+	config  map[string]string
+	authConfig ibclient.HostConfig
 }
 
 func makeProvider(host *provider.HostClient, name, version string, pulumiSchema []byte) (pulumirpc.ResourceProviderServer, error) {
@@ -47,6 +53,7 @@ func makeProvider(host *provider.HostClient, name, version string, pulumiSchema 
 		name:    name,
 		version: version,
 		schema:  pulumiSchema,
+		config:  map[string]string{},
 	}, nil
 }
 
@@ -82,6 +89,16 @@ func (p *infobloxProvider) DiffConfig(ctx context.Context, req *pulumirpc.DiffRe
 
 // Configure configures the resource provider with "globals" that control its behavior.
 func (p *infobloxProvider) Configure(_ context.Context, req *pulumirpc.ConfigureRequest) (*pulumirpc.ConfigureResponse, error) {
+	for key, val := range req.GetVariables() {
+		p.config[strings.TrimPrefix(key, "infoblox:config:")] = val
+	}
+
+	authConfig, err := p.getAuthConfig()
+	if err != nil {
+		return nil, err
+	}
+	p.authConfig = authConfig
+	
 	return &pulumirpc.ConfigureResponse{}, nil
 }
 
@@ -234,6 +251,30 @@ func (p *infobloxProvider) GetSchema(ctx context.Context, req *pulumirpc.GetSche
 func (p *infobloxProvider) Cancel(context.Context, *pbempty.Empty) (*pbempty.Empty, error) {
 	// TODO
 	return &pbempty.Empty{}, nil
+}
+
+func (p *infobloxProvider) getConfig(configName, envName string) string {
+	if val, ok := p.config[configName]; ok {
+		return val
+	}
+
+	return os.Getenv(envName)
+}
+
+func (p *infobloxProvider) getAuthConfig() (ibclient.HostConfig, error) {
+	port := p.getConfig("port", "INFOBLOX_PORT")
+	if port == "" {
+		port = "443"
+	}
+
+	hostConfig := ibclient.HostConfig{
+		Host: p.getConfig("host", "INFOBLOX_HOST"),
+		Version: "2.11",
+		Port: port,
+		Username: p.getConfig("username", "INFOBLOX_USERNAME"),
+		Password: p.getConfig("password", "INFOBLOX_PASSWORD"),
+	}
+	return hostConfig, nil
 }
 
 func makeRandom(length int) string {
