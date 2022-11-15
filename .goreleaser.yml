@@ -13,7 +13,6 @@ builds:
       - amd64
       - arm64
     goos:
-      - darwin
       - windows
       - linux
     ldflags:
